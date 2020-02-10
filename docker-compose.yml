@@ -1,0 +1,54 @@
+version: '3.3'
+
+networks:
+  choise-net:
+    driver: bridge
+
+services:
+  #  partners_nginx:
+  #    container_name: partners_nginx
+  #    image: nginx:stable-alpine
+  #    ports:
+  #      - 8095:8095
+  #    volumes:
+  #      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+  #      - .:/var/www
+  #    depends_on:
+  #      - partners_app
+  #    networks:
+  #      - react-net
+
+  choise_app:
+    container_name: choise_app
+    #    image: php:cli-buster
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8001
+    tty: true
+    volumes:
+      #      - ./docker/php/php-fpm.d:/usr/local/etc/php-fpm:ro
+      - ./:/var/www
+    #      - ./docker/php/my.ini:/usr/local/etc/php/conf.d/my.ini
+    #    depends_on:
+    #      - partners_db
+    networks:
+      - choise-net
+
+#  choise_db:
+#    container_name: choise_db
+#    image: mysql:8
+#    ports:
+#      - 13308:3306
+#    volumes:
+#      - ./docker/mysql/storage:/var/lib/mysql
+#      - ./docker/mysql/backup:/var/db
+#      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+#    environment:
+#      MYSQL_ROOT_PASSWORD: secret
+#      MYSQL_DATABASE: partner
+#      MYSQL_USER: developer
+#    networks:
+#      - choise-net
