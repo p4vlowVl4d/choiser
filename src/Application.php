@@ -5,6 +5,7 @@ namespace App;
 use App\Depends\Container;
 use P4vlowVl4d\Collection\ArrayCollection;
 
+global $themes;
 /**
  * Class Application
  * @package App
