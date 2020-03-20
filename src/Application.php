@@ -15,12 +15,7 @@ class Application
     /**
      * @var Container
      */
-    private ArrayCollection $services;
-
-    /**
-     * @var Container
-     */
-    private ArrayCollection $configuration;
+    protected Container $container;
 
     /**
      * @return Application
@@ -29,12 +24,13 @@ class Application
     {
         $server = require dirname(__DIR__) . '/config/server.php';
         $services = require dirname(__DIR__) . '/config/services.php';
+        $factorise = require dirname(__DIR__) . '/config/factories.php';
         return $this;
     }
 
-    protected function resolve()
+    protected function resolve(string $service)
     {
-
+       return $this->container->service($service);
     }
 
     /**
